@@ -7,7 +7,7 @@ FocalConvNetX is an enhanced version of the FocalConvNet, designed for the class
 - MongoDB instead of CSV Loading for Kvasir-capsule (Completed)
 - Mixed Precising Training (helps reduce memory usuage, Improves speed, Completed)
   - You can test with mixed precision training enabled and disabled to see the results.
-- More Improvements adding soon
+- More Improvements adding soon.
 
 ## Prerequisites
 - Python 3.x
