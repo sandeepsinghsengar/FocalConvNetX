@@ -1,69 +1,56 @@
-# Kvasir-Capsule
+# FocalConvNetX for Video Capsule Endoscopy Classification
 
-This is the official repository for the Kvasir-Capsule dataset, which is the largest publicly released PillCAM dataset. In total, the dataset contains 47,238 labeled images and 117 videos, where it captures anatomical landmarks and pathological and normal findings. The results is more than 4,741,621 images and video frames all together.
+## Overview
+FocalConvNetX is an enhanced version of the FocalConvNet, designed for the classification of small bowel anatomical landmarks and luminal findings in video capsule endoscopy. This project aims to further improve/enhance the speed and accuracy of FocalConvNet with various methods and techniques.
 
-The full dataset can be dowloaded via: https://osf.io/dv2ag/
+## Features:
+- MongoDB instead of CSV Loading for Kvasir-capsule (Completed)
+- Mixed Precising Training (helps reduce memory usuage, Improves speed, Completed)
+  - You can test with mixed precision training enabled and disabled to see the results.
+- More Improvements adding soon
 
-Some users experience problems with downloading the data from OSF. All data is also available here: https://drive.google.com/drive/u/1/folders/18vEHN1CG7oNFKdT2NmhtJjrFhb3tLG1Z and here https://datasets.simula.no/kvasir-capsule/ as zip file.
+## Prerequisites
+- Python 3.x
+- PyTorch
+- MongoDB
+- Google Colab (optional, but recommended for training)
 
-The preprint describing the data can be accessed via: https://osf.io/gr7bn
+## Setting Up MongoDB
+To use MongoDB with FocalConvNetX, follow these steps:
 
-Here you will find the files used to prepare the dataset, create the baseline experiments, and the official two-fold splits of the dataset.
+1. **Install MongoDB**: Simply Install Pymongo on your GoogleColab.
+2. **Configure MongoDB**: Register a free account on MongoDB website and create a free cluster, Make sure to add access from all ip adressess if you are using Colab.
+3. **Database Schema**: Ensure your database schema matches the expected format used in the scripts.
 
-![banner](https://raw.githubusercontent.com/simula/kvasir-capsule/master/static/images/banner.png?token=AD6YIMUIZUBGKGAPFAQB62C7HTU5G)
+## Using FocalConvNetX
+
+### Data Preparation
+- Download the Kvasir-Capsule dataset from [here](https://osf.io/dv2ag/).
+- Unzip and organize the dataset according to the expected directory structure (refer to the Kvasir-Capsule repository for more details).
+- Simple Guide on Folder Structure: Dataset folders should go under official_splits/1 or official_splits/2, It should look like official_splits/1/Ulcer or any other lables. Make sure to equally divide the dataset, You can go for either 70/30 or 50/50, Whatever is your preference.
+
+### Model Training and Testing
+1. **FocalConvNet Architecture**: The architecture is defined in `focalconv.py`.
+2. **Training Script**: Use the training script provided in the Kvasir-Capsule official repository.
+3. **Model Replacement**: In the training script, replace the model definition at Line 308 with the FocalConvNet architecture.
+4. **Run Training**: Execute the training script to start the training process. Monitor the training progress and adjust hyperparameters as needed.
+
+## Running the Project on Google Colab
+1. **Upload Files**: Upload the dataset, our current repository, and any other necessary files to Google Drive.
+2. **Open Colab Notebook**: Launch or Upload the ipynb file on Google Colab to start running the code.
+3. **Install Dependencies**: Ensure all required libraries are installed in the Colab environment.
+4. **Run Scripts**: Execute your scripts in Colab, taking advantage of the available GPU resources for training. (t4)
 
 ## Repository Structure
-This repository has the following structure. *experiments* contains the files used to perform the classification experiments presented in the paper. *official_splits* contains the official splits of the dataset. We recommend that users of this dataset use these splits in order to ensure a fair comparison of results. *plot_scripts* contains a the scripts used to generate all plots. *static* contains some files used in this repository. *metadata.csv* contains some additional metadata about the labeled images, including coordinates for bounding boxes.
+- `focalconv.py`: Contains the FocalConvNet model architecture.
+- `dataloader.py`: Script for loading and preprocessing the dataset.
+- `resnet152.py`: Implementation of the ResNet152 model with Mixed Precision Training.
+- Other supportive scripts and utility files.
 
-## Dataset Details
-The dataset can be split into three distinct parts; Labeled image data, labeled video data, and unlabaled video data. Each part is further described below.
+![Folder Structure](static/images/folder-structure.png)
 
-**Labeled images** In total, the dataset contains 47,238 labeled images stored using the PNG format. The images can be found in the images folder. The classes that each of the images belongs correspond to the folder they are stored. For example, the ’polyp’ folder contains all polyp images, and the ’Angiectasia’ folder contains all images of Angiectasia. The number of images per class is not balanced, which is a common challenge in the medical field because some findings occur more often than others. This adds an additional challenge for researchers since methods applied to the data should also be able to learn from a small amount of training data. The labeled images represent 14 different classes of findings. Furthermore, the labeled image data includes bounding box coordinates, which can be found in the *metadata.csv* file.
+## FAQ and Contact
+For any advice or guidance on using this work, please feel free to contact us via email (owensingh82@gmail.com).
 
-**Labeled videos** The dataset contains a total of 43 labeled videos containing different findings and landmarks. This corresponds to approximately 19 hours of video and 1,955,675 video frames that can be converted to images if needed. Each video has been manually assessed by a medical professional working in the field of gastroenterology and resulted in a total of 47,238 annotated frames.
-
-**Unlabeled videos** In total, the dataset contains 74 unlabeled videos, which is equal to approximatley 25 hours of video and 2,785,829 video frames.
-
-## Image Labels
-Kvasir-Capsule includes the follow image labels for the labeled part of the dataset:
-
-| ID | Label |
-| --- | --- |
-| 0  | Ampulla of Vater |
-| 1  | Angiectasia |
-| 2  | Blood - fresh |
-| 3  | Blood - hematin |
-| 4  | Erosion |
-| 5  | Erythema |
-| 6  | Foreign body |
-| 7  | Ileocecal valve |
-| 8  | Lymphangiectasia |
-| 9  | Normal clean mucosa |
-| 10  | Polyp |
-| 11 | Pylorus |
-| 12 | Reduced mucosal view |
-| 13 | Ulcer |
-
-## Terms of Use
-The data is released fully open for research and educational purposes. The use of the dataset for purposes such as competitions and commercial purposes needs prior written permission. In all documents and papers that use or refer to the dataset or report experimental results based on the Kvasir-Capsule, a reference to the related article needs to be added: https://osf.io/gr7bn.
-
-Here is a BibTeX entry that you can use to cite the dataset:
-```
-  @misc{smedsrud2020,
-      title={Kvasir-Capsule, a video capsule endoscopy dataset},
-      url={https://osf.io/gr7bn/},
-      DOI={10.31219/osf.io/gr7bn/},
-      publisher={OSF Preprints},
-      author={
-          Smedsrud, Pia H and Gjestang, Henrik and Nedrejord, Oda O and
-          N{\ae}ss, Espen and Thambawita, Vajira and Hicks, Steven and
-          Jha, Debesh and Berstad, Tor Jan Derek and  Eskeland, Sigrun L and
-          Espeland, H{\aa}vard and Petlund, Andreas and Schmidt, Peter T and
-          Hammer, Hugo L and de Lange, Thomas and Riegler, Michael A and Halvorsen, P{\aa}l
-      },
-      year={2020},
-      month={Aug}
-  }
-```
-## Contact
-Please contact paalh@simula.no, steven@simula.no, or michael@simula.no for any questions regarding the dataset.
+## Acknowledgments
+This project builds upon the Focal Modulation networks and the Kvasir-Capusle repository. We thank the authors for their well-organized code and contributions to the field.
