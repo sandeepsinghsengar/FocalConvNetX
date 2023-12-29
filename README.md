@@ -3,6 +3,8 @@
 ## Overview
 FocalConvNetX is an enhanced version of the FocalConvNet, designed for the classification of small bowel anatomical landmarks and luminal findings in video capsule endoscopy. This project aims to further improve/enhance the speed and accuracy of FocalConvNet with various methods and techniques.
 
+### Note: This is not the complete version of the repository, I am still testing and improving the model even further. If you find any bugs or issues related to the code, Please open a ticket.
+
 ## Features:
 - MongoDB instead of CSV Loading for Kvasir-capsule (Completed)
 - Mixed Precising Training (helps reduce memory usuage, Improves speed, Completed)
