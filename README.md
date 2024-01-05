@@ -13,7 +13,7 @@ FocalConvNetX is an enhanced version of the FocalConvNet, designed for the class
 
 ## Prerequisites
 - Python 3.x
-- PyTorch
+- PyTorch version?
 - MongoDB
 - Google Colab (optional, but recommended for training)
 
